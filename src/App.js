@@ -1,22 +1,19 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import store from './reducers/store';
+import Login from './containers/login/Login';
+import Register from './containers/register/Register';
 
-class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			info: {}
-		};
-	}
-	componentDidMount() {
-		axios.get('/data').then(res => {
-			this.setState({ info: res.data });
-		});
-	}
-
-	render() {
-		return <div>hello {this.state.info.user}</div>;
-	}
-}
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Router>
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={Register} />
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;
