@@ -13,12 +13,11 @@ class Login extends Component {
             <InputItem type='phone' placeholder='186 1234 1234'>
               手机号码
             </InputItem>
-            <WhiteSpace />
             <InputItem type='password' placeholder='****'>
               密码
             </InputItem>
           </List>
-          <WhiteSpace />
+          <WhiteSpace size='xl' />
           <Button type='primary'>登录</Button>
           <WhiteSpace />
           <Button type='primary' className='register-btn'>
