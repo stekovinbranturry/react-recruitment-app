@@ -42,8 +42,7 @@ function Register() {
             BOSS
           </RadioItem>
         </List>
-        <WhiteSpace />
-        <WhiteSpace />
+        <WhiteSpace size='xl' />
         <Button type='primary'>注册</Button>
       </WingBlank>
     </Fragment>
