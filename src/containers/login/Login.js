@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { List, InputItem, Button, WhiteSpace, WingBlank } from 'antd-mobile';
 import Logo from '../../components/Logo';
 
+@withRouter
 class Login extends Component {
   render() {
     return (
@@ -20,8 +21,11 @@ class Login extends Component {
           <WhiteSpace size='xl' />
           <Button type='primary'>登录</Button>
           <WhiteSpace />
-          <Button type='primary' className='register-btn'>
-            <Link to='/register'>注册</Link>
+          <Button
+            type='primary'
+            onClick={() => this.props.history.push('/register')}
+          >
+            注册
           </Button>
         </WingBlank>
       </Fragment>
