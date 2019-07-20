@@ -1,0 +1,5 @@
+const PHONE_LENGTH_ERROR = '请输入11位数字';
+const PASSWORD_NOT_MATCH = '确认密码与密码不一致';
+const FORM_BLANK_ERROR = '请完善表格';
+
+export { PHONE_LENGTH_ERROR, PASSWORD_NOT_MATCH, FORM_BLANK_ERROR };
