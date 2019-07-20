@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import {
 	Radio,
 	List,
@@ -13,17 +14,20 @@ import Logo from '../../components/Logo';
 import {
 	PHONE_LENGTH_ERROR,
 	PASSWORD_NOT_MATCH,
-	FORM_BLANK_ERROR
-} from '../../constants/error';
+	FORM_BLANK_ERROR,
+	REGISTER_SUCCESS
+} from '../../constants/info';
+import { getRirectPath } from '../../utils/user';
 
 const RadioItem = Radio.RadioItem;
 function Register() {
 	// hooks
-	const [identity, setIdentity] = useState('employee');
+	const [identity, setIdentity] = useState('seeker');
 	const [phone, setPhone] = useState('');
 	const [phoneErr, setPhoneErr] = useState(false);
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
+	const [redirectPath, setRedirectPath] = useState('');
 
 	const registerInfo = { identity, phone, password };
 
@@ -41,8 +45,18 @@ function Register() {
 			Toast.info(PASSWORD_NOT_MATCH, 1);
 			return;
 		}
-		console.log(registerInfo);
-		axios('/user');
+		axios
+			.post('/user/register', registerInfo)
+			.then(res => {
+				if (res.status === 200 && res.data.code === 1001) {
+					Toast.info(res.data.msg);
+				}
+				if (res.status === 200 && res.data.code === 1000) {
+					Toast.info(REGISTER_SUCCESS);
+					setRedirectPath(getRirectPath(registerInfo));
+				}
+			})
+			.catch(err => console.log(err));
 	};
 
 	// phone error
@@ -62,6 +76,7 @@ function Register() {
 
 	return (
 		<Fragment>
+			{redirectPath ? <Redirect to={redirectPath} /> : null}
 			<Logo />
 			<WingBlank>
 				<List>
@@ -95,14 +110,14 @@ function Register() {
 				<div className="input-title">选择身份：</div>
 				<List>
 					<RadioItem
-						checked={identity === 'employee'}
-						onClick={() => setIdentity('employee')}
+						checked={identity === 'seeker'}
+						onClick={() => setIdentity('seeker')}
 					>
 						牛人
 					</RadioItem>
 					<RadioItem
-						checked={identity === 'employer'}
-						onClick={() => setIdentity('employer')}
+						checked={identity === 'hunter'}
+						onClick={() => setIdentity('hunter')}
 					>
 						BOSS
 					</RadioItem>
