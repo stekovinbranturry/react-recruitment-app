@@ -27,4 +27,14 @@ Router.post('/register', (req, res) => {
 	});
 });
 
+Router.post('/login', (req, res) => {
+	console.log(req.body);
+	const { phone, password } = req.body;
+	User.findOne({ phone, password: utils.md5Encryption(password) }, (err, doc) =>
+		doc
+			? res.json({ code: 1100, doc })
+			: res.json({ code: 1101, msg: '手机号或密码错误' })
+	);
+});
+
 module.exports = Router;
