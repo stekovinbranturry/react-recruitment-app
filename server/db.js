@@ -10,10 +10,8 @@ const models = {
 		password: { type: String, required: true },
 		identity: { type: String, required: true },
 		avatar: String,
-		desc: String,
-		job_title: String,
-		company: String,
-		salary: String
+		jobsHunting: Array,
+		jobsSeeking: Array
 	}
 };
 

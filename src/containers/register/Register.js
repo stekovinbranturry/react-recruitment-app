@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
 	Radio,
 	List,
@@ -18,6 +19,7 @@ import {
 	REGISTER_SUCCESS
 } from '../../constants/info';
 import { getRirectPath } from '../../utils/user';
+import { createRegisterAction } from '../../reducers/user.redux';
 
 const RadioItem = Radio.RadioItem;
 function Register() {
@@ -31,6 +33,7 @@ function Register() {
 
 	const registerInfo = { identity, phone, password };
 
+	const dispatch = useDispatch();
 	// form validate
 	const handleRegister = () => {
 		if (!phone || !password || !confirmPassword) {
@@ -45,6 +48,7 @@ function Register() {
 			Toast.info(PASSWORD_NOT_MATCH, 1);
 			return;
 		}
+
 		axios
 			.post('/user/register', registerInfo)
 			.then(res => {
@@ -53,6 +57,7 @@ function Register() {
 				}
 				if (res.status === 200 && res.data.code === 1000) {
 					Toast.info(REGISTER_SUCCESS);
+					dispatch(createRegisterAction({ phone, identity }));
 					setRedirectPath(getRirectPath(registerInfo));
 				}
 			})

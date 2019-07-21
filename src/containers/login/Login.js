@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import {
 	Toast,
@@ -15,6 +16,7 @@ import {
 	LOGIN_FORM_BLANK_ERROR
 } from '../../constants/info';
 import { getRirectPath } from '../../utils/user';
+import { createLoginAction } from '../../reducers/user.redux';
 
 function Login(props) {
 	// hooks
@@ -24,6 +26,8 @@ function Login(props) {
 	const [redirectPath, setRedirectPath] = useState('');
 
 	const loginInfo = { phone, password };
+
+	const dispatch = useDispatch();
 
 	const phoneOnChange = phone => {
 		if (phone.replace(/\s/g, '').length < 11) {
@@ -58,6 +62,8 @@ function Login(props) {
 					Toast.info(res.data.msg);
 				}
 				if (res.status === 200 && res.data.code === 1100) {
+					const { phone, avatar, identity } = res.data.doc;
+					dispatch(createLoginAction({ phone, avatar, identity }));
 					setRedirectPath(getRirectPath(res.data.doc));
 				}
 			})
