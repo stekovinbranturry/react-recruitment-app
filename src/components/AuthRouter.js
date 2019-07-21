@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { getRirectPath } from '../utils/user';
 
 @withRouter
 class AuthRouter extends Component {
@@ -16,8 +17,8 @@ class AuthRouter extends Component {
 		} else {
 			axios.get('/user/info').then(res => {
 				if (res.status === 200 && res.data.code === 0) {
-					const { identity } = res.data.doc[0];
-					this.props.history.push(`/${identity}-info`);
+					const path = getRirectPath(res.data.doc[0]);
+					this.props.history.push(path);
 				}
 			});
 		}
