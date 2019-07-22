@@ -20,6 +20,7 @@ import {
 	JOB_PUBLISH_FAILURE
 } from '../../constants/info';
 import { dateFormat } from '../../utils/date';
+import Logout from '../../components/Logout';
 
 const avatars = [
 	'boy',
@@ -202,6 +203,9 @@ function HunterProfile() {
 				<Button type="primary" onClick={publishJob}>
 					确认发布
 				</Button>
+				<WhiteSpace size="lg" />
+				<Logout />
+				<WhiteSpace size="lg" />
 			</WingBlank>
 		</Fragment>
 	);
