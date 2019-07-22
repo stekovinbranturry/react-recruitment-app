@@ -78,4 +78,35 @@ Router.post('/login', (req, res) => {
 	);
 });
 
+/**
+ * Update profile
+ */
+Router.post('/update', (req, res) => {
+	console.log(req.body);
+	const { userid } = req.cookies;
+	const { avatar, jobsHunting } = req.body;
+	if (avatar) {
+		User.findByIdAndUpdate({ _id: userid }, { avatar }, (err, doc) =>
+			doc
+				? res.json({ code: 1200, msg: 'Avatar上传成功' })
+				: res.json({ code: 1201, msg: 'Avatar上传失败' })
+		);
+	}
+	if (jobsHunting) {
+		User.updateOne({ _id: userid }, { $push: { jobsHunting } }, (err, doc) =>
+			doc ? res.json(doc) : res.json(err)
+		);
+	}
+});
+
+/**
+ * User query
+ */
+Router.post('/query', (req, res) => {
+	const { userid } = req.cookies;
+	User.findOne({ _id: userid }, (err, doc) =>
+		doc ? res.json({ code: 1300, doc }) : res.json({ code: 1301, doc })
+	);
+});
+
 module.exports = Router;
