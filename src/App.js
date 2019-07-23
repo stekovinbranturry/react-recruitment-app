@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { CookiesProvider } from 'react-cookie';
 import store from './reducers/store';
-import AuthRouter from './components/AuthRouter';
-import Login from './containers/login/Login';
-import Register from './containers/register/Register';
-import HunterProfile from './containers/profile/HunterProfile';
-import MainTabBar from './containers/tabbar/MainTabBar';
+import AuthRouter from './components/AuthRouter.jsx';
+import Login from './containers/login/Login.jsx';
+import Register from './containers/register/Register.jsx';
+import HunterProfile from './containers/profile/HunterProfile.jsx';
+import MainTabBar from './containers/tabbar/MainTabBar.jsx';
 
 const App = () => {
   return (
