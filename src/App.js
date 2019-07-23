@@ -7,20 +7,22 @@ import AuthRouter from './components/AuthRouter';
 import Login from './containers/login/Login';
 import Register from './containers/register/Register';
 import HunterProfile from './containers/profile/HunterProfile';
+import MainTabBar from './containers/tabbar/MainTabBar';
 
 const App = () => {
-	return (
-		<Provider store={store}>
-			<CookiesProvider>
-				<Router>
-					<AuthRouter />
-					<Route exact path="/hunter-profile" component={HunterProfile} />
-					<Route exact path="/login" component={Login} />
-					<Route exact path="/register" component={Register} />
-				</Router>
-			</CookiesProvider>
-		</Provider>
-	);
+  return (
+    <Provider store={store}>
+      <CookiesProvider>
+        <Router>
+          <AuthRouter />
+          <Route exact path='/hunter-profile' component={HunterProfile} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
+          <MainTabBar />
+        </Router>
+      </CookiesProvider>
+    </Provider>
+  );
 };
 
 export default App;

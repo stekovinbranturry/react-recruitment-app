@@ -21,8 +21,7 @@ const AuthRouter = props => {
         }
       });
     }
-    // eslint-disable-next-line
-  }, []);
+  });
 
   return null;
 };
