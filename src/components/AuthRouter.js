@@ -1,32 +1,30 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { getRirectPath } from '../utils/user';
 
-@withRouter
-class AuthRouter extends Component {
-	componentDidMount() {
-		const pathList = ['/login', '/register'];
-		const currentPath = this.props.location.pathname;
-		if (!pathList.includes(currentPath)) {
-			axios.get('/user/info').then(res => {
-				if (res.status === 200 && res.data.code === 1) {
-					this.props.history.push('/login');
-				}
-			});
-		} else {
-			axios.get('/user/info').then(res => {
-				if (res.status === 200 && res.data.code === 0) {
-					const path = getRirectPath(res.data.doc[0]);
-					this.props.history.push(path);
-				}
-			});
-		}
-	}
+const AuthRouter = props => {
+  useEffect(() => {
+    const pathList = ['/login', '/register'];
+    const currentPath = props.location.pathname;
+    if (!pathList.includes(currentPath)) {
+      axios.get('/user/info').then(res => {
+        if (res.status === 200 && res.data.code === 1) {
+          props.history.push('/login');
+        }
+      });
+    } else {
+      axios.get('/user/info').then(res => {
+        if (res.status === 200 && res.data.code === 0) {
+          const path = getRirectPath(res.data.doc[0]);
+          props.history.push(path);
+        }
+      });
+    }
+    // eslint-disable-next-line
+  }, []);
 
-	render() {
-		return null;
-	}
-}
+  return null;
+};
 
-export default AuthRouter;
+export default withRouter(AuthRouter);
