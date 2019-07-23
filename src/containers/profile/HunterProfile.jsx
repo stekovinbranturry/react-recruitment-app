@@ -3,13 +3,11 @@ import axios from 'axios';
 import uuid from 'uuid/v4';
 import {
   NavBar,
-  Grid,
   WhiteSpace,
   WingBlank,
   InputItem,
   List,
   TextareaItem,
-  Flex,
   Button,
   Toast,
   Card
@@ -21,29 +19,7 @@ import {
 } from '../../constants/info';
 import { dateFormat } from '../../utils/date';
 import Logout from '../../components/Logout.jsx';
-
-const avatars = [
-  'boy',
-  'bull',
-  'chick',
-  'crab',
-  'girl',
-  'hedgehog',
-  'hippopotamus',
-  'koala',
-  'lemur',
-  'man',
-  'pig',
-  'tiger',
-  'whale',
-  'woman',
-  'zebra'
-];
-
-const data = avatars.map(item => ({
-  icon: require(`../../image/avatars/${item}.png`),
-  text: item
-}));
+import AvatarSelector from '../../components/AvatarSelector.jsx';
 
 function HunterProfile() {
   /**
@@ -79,14 +55,6 @@ function HunterProfile() {
   /**
    * Handle actions
    */
-  const uploadAvatar = avatar => {
-    axios
-      .post('/user/update', { avatar })
-      .then(res =>
-        res.data.code === 1200 ? setAvatar(avatar) : Toast.info(res.data.msg)
-      )
-      .catch(err => console.log(err));
-  };
 
   const publishJob = () => {
     const { company, title, salary, desc } = input;
@@ -122,24 +90,6 @@ function HunterProfile() {
   };
 
   /**
-   * Avatar component
-   */
-  const avatarSelector = avatar ? (
-    <Flex justify='center'>
-      <img
-        className='avatar'
-        src={require(`../../image/avatars/${avatar}.png`)}
-        alt={avatar}
-      />
-    </Flex>
-  ) : (
-    <div>
-      <div className='input-title'>请选择头像：</div>
-      <Grid data={data} columnNum={5} onClick={_el => uploadAvatar(_el.text)} />
-    </div>
-  );
-
-  /**
    * Jobs list published component
    */
   const jobsList = jobs.map(item => {
@@ -158,55 +108,59 @@ function HunterProfile() {
 
   return (
     <Fragment>
-      <NavBar mode='dark'>BOSS个人信息页</NavBar>
-      <WingBlank>
-        {avatarSelector}
-        {jobs[0] ? (
-          <div>
-            <div className='input-title'>已发布职位</div>
-            {jobsList}
-          </div>
-        ) : null}
-        <div className='input-title'>发布新职位</div>
-        <List>
-          <InputItem
-            placeholder='XXX公司'
-            value={input.company}
-            onChange={v => setInput({ ...input, company: v })}
-          >
-            公司名称
-          </InputItem>
-          <InputItem
-            placeholder='软件工程师'
-            value={input.title}
-            onChange={v => setInput({ ...input, title: v })}
-          >
-            职位名称
-          </InputItem>
-          <InputItem
-            placeholder='10k - 20k'
-            value={input.salary}
-            onChange={v => setInput({ ...input, salary: v })}
-          >
-            薪资水平
-          </InputItem>
-          <TextareaItem
-            title='职位描述'
-            rows={5}
-            placeholder='描述您即将发布的职位要求'
-            autoHeight
-            value={input.desc}
-            onChange={v => setInput({ ...input, desc: v })}
-          />
-        </List>
-        <WhiteSpace size='lg' />
-        <Button type='primary' onClick={publishJob}>
-          确认发布
-        </Button>
-        <WhiteSpace size='lg' />
-        <Logout />
-        <WhiteSpace size='lg' />
-      </WingBlank>
+      <NavBar className='nav-bar' mode='dark'>
+        BOSS个人信息页
+      </NavBar>
+      <div className='page-content'>
+        <WingBlank>
+          <AvatarSelector avatar={avatar} setAvatar={setAvatar} />
+          {jobs[0] ? (
+            <div>
+              <div className='input-title'>已发布职位</div>
+              {jobsList}
+            </div>
+          ) : null}
+          <div className='input-title'>发布新职位</div>
+          <List>
+            <InputItem
+              placeholder='XXX公司'
+              value={input.company}
+              onChange={v => setInput({ ...input, company: v })}
+            >
+              公司名称
+            </InputItem>
+            <InputItem
+              placeholder='软件工程师'
+              value={input.title}
+              onChange={v => setInput({ ...input, title: v })}
+            >
+              职位名称
+            </InputItem>
+            <InputItem
+              placeholder='10k - 20k'
+              value={input.salary}
+              onChange={v => setInput({ ...input, salary: v })}
+            >
+              薪资水平
+            </InputItem>
+            <TextareaItem
+              title='职位描述'
+              rows={5}
+              placeholder='描述您即将发布的职位要求'
+              autoHeight
+              value={input.desc}
+              onChange={v => setInput({ ...input, desc: v })}
+            />
+          </List>
+          <WhiteSpace size='lg' />
+          <Button type='primary' onClick={publishJob}>
+            确认发布
+          </Button>
+          <WhiteSpace size='lg' />
+          <Logout />
+          <WhiteSpace size='lg' />
+        </WingBlank>
+      </div>
     </Fragment>
   );
 }
