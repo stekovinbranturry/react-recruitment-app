@@ -7,6 +7,8 @@ import AuthRouter from './components/AuthRouter.jsx';
 import Login from './containers/login/Login.jsx';
 import Register from './containers/register/Register.jsx';
 import HunterProfile from './containers/profile/HunterProfile.jsx';
+import SeekerProfile from './containers/profile/SeekerProfile.jsx';
+
 import MainTabBar from './containers/tabbar/MainTabBar.jsx';
 
 const App = () => {
@@ -15,9 +17,12 @@ const App = () => {
       <CookiesProvider>
         <Router>
           <AuthRouter />
-          <Route exact path='/hunter-profile' component={HunterProfile} />
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/register' component={Register} />
+          <div className='pages'>
+            <Route exact path='/hunter-profile' component={HunterProfile} />
+            <Route exact path='/seeker-profile' component={SeekerProfile} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/register' component={Register} />
+          </div>
           <MainTabBar />
         </Router>
       </CookiesProvider>
