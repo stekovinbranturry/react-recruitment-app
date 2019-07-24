@@ -79,17 +79,52 @@ Router.post('/login', (req, res) => {
 });
 
 /**
- * Update profile
+ * upload avatar
  */
-Router.post('/update', (req, res) => {
+Router.post('/uploadAvatar', (req, res) => {
   console.log(req.body);
   const { userid } = req.cookies;
-  const { avatar, jobsHunting } = req.body;
+  const { avatar } = req.body;
   if (avatar) {
     User.findByIdAndUpdate({ _id: userid }, { avatar }, (err, doc) =>
       doc
         ? res.json({ code: 1200, msg: 'Avatar上传成功' })
         : res.json({ code: 1201, msg: 'Avatar上传失败' })
+    );
+  }
+});
+/**
+ * Update profile
+ */
+Router.post('/update', (req, res) => {
+  console.log(req.body);
+  const { userid } = req.cookies;
+  const {
+    position,
+    name,
+    age,
+    education,
+    skills,
+    workExperience,
+    projectExperience,
+    jobsHunting
+  } = req.body;
+  if (position) {
+    User.findByIdAndUpdate(
+      { _id: userid },
+      {
+        position,
+        name,
+        age,
+        education,
+        skills,
+        workExperience,
+        projectExperience
+      },
+      (err, doc) =>
+        doc
+          ? res.json({ code: 1202, msg: '简历更新成功' })
+          : res.json({ code: 1203, msg: '简历更新失败' })
     );
   }
   if (jobsHunting) {
@@ -104,7 +139,7 @@ Router.post('/update', (req, res) => {
  */
 Router.post('/query', (req, res) => {
   const { userid } = req.cookies;
-  User.findOne({ _id: userid }, (err, doc) =>
+  User.findOne({ _id: userid }, _filter, (err, doc) =>
     doc ? res.json({ code: 1300, doc }) : res.json({ code: 1301, doc })
   );
 });
