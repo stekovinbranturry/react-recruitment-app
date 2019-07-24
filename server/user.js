@@ -110,7 +110,7 @@ Router.post('/update', (req, res) => {
 		jobsHunting
 	} = req.body;
 	if (position) {
-		User.findOneAndUpdate(
+		User.findByIdAndUpdate(
 			{ _id: userid },
 			{
 				position,
