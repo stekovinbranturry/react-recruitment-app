@@ -1,5 +1,5 @@
 import React, { useState, useContext, Fragment } from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import axios from 'axios';
 import {
@@ -24,7 +24,7 @@ import { getRirectPath } from '../../utils/user';
 const RadioItem = Radio.RadioItem;
 const Register = () => {
 	const store = useContext(UserStoreContext);
-	const { authorize } = store;
+	const { updateUser } = store;
 	// hooks
 	const [identity, setIdentity] = useState('seeker');
 	const [phone, setPhone] = useState('');
@@ -58,7 +58,7 @@ const Register = () => {
 				}
 				if (res.status === 200 && res.data.code === 1000) {
 					Toast.info(REGISTER_SUCCESS);
-					authorize({ phone, identity, isLogin: true });
+					updateUser({ phone, identity, isLogin: true });
 					setRedirectPath(getRirectPath(registerInfo));
 				}
 			})
@@ -137,4 +137,4 @@ const Register = () => {
 	);
 };
 
-export default withRouter(observer(Register));
+export default observer(Register);

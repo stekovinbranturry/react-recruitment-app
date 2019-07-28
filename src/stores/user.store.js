@@ -9,7 +9,7 @@ class UserStore {
 		isLogin: false
 	};
 
-	@action authorize = payload => ({ ...this.user, ...payload });
+	@action updateUser = payload => (this.user = { ...this.user, ...payload });
 }
 
 const UserStoreContext = createContext(new UserStore());

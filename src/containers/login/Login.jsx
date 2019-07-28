@@ -20,7 +20,7 @@ import { getRirectPath } from '../../utils/user';
 
 const Login = props => {
 	const store = useContext(UserStoreContext);
-	const { authorize } = store;
+	const { updateUser } = store;
 	// hooks
 	const [phone, setPhone] = useState('');
 	const [password, setPassword] = useState('');
@@ -63,7 +63,7 @@ const Login = props => {
 				}
 				if (res.status === 200 && res.data.code === 1100) {
 					const { phone, avatar, identity } = res.data.doc;
-					authorize({ phone, avatar, identity, isLogin: true });
+					updateUser({ phone, avatar, identity, isLogin: true });
 					setRedirectPath(getRirectPath(res.data.doc));
 				}
 			})

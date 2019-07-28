@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { observer } from 'mobx-react-lite';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import { Grid, Flex, Toast } from 'antd-mobile';
+import UserStoreContext from '../stores/user.store';
 
-const AvatarSelector = props => {
+const AvatarSelector = () => {
 	const avatars = [
 		'boy',
 		'bull',
@@ -27,13 +28,17 @@ const AvatarSelector = props => {
 		text: item
 	}));
 
-	const { avatar, setAvatar } = props;
+	const store = useContext(UserStoreContext);
+	const { user, updateUser } = store;
+	const { avatar } = user;
 
 	const uploadAvatar = avatar => {
 		axios
 			.post('/user/uploadAvatar', { avatar })
 			.then(res =>
-				res.data.code === 1200 ? setAvatar(avatar) : Toast.info(res.data.msg)
+				res.data.code === 1200
+					? updateUser({ avatar })
+					: Toast.info(res.data.msg)
 			)
 			.catch(err => console.log(err));
 	};
@@ -54,9 +59,4 @@ const AvatarSelector = props => {
 	);
 };
 
-AvatarSelector.propTypes = {
-	avatar: PropTypes.string,
-	setAvatar: PropTypes.func
-};
-
-export default AvatarSelector;
+export default observer(AvatarSelector);
