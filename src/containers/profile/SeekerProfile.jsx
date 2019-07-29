@@ -101,13 +101,14 @@ const SeekerProfile = () => {
             >
               学历
             </InputItem>
-            <InputItem
+            <TextareaItem
+              title='技能'
+              rows={3}
+              autoHeight
               value={skills}
               onChange={v => setInput({ ...input, skills: v })}
               editable={editable}
-            >
-              技能
-            </InputItem>
+            />
             <TextareaItem
               title='工作经验'
               rows={3}
