@@ -15,7 +15,6 @@ const HunterLists = () => {
           res.data.doc.forEach(el => {
             tmp = [...tmp, ...el.jobsHunting];
           });
-          console.log(tmp);
           setJobs([...jobs, ...tmp]);
         } else {
           Toast.info(res.data.msg);

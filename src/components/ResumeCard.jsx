@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Card, WhiteSpace } from 'antd-mobile';
 
-const ResumeCard = ({ list }) => {
-  console.log(list);
-  return list.map(
+const ResumeCard = ({ list }) =>
+  list.map(
     ({
       _id,
       name,
@@ -15,8 +14,8 @@ const ResumeCard = ({ list }) => {
       workExperience,
       projectExperience
     }) => (
-      <Fragment>
-        <Card key={_id}>
+      <div key={_id}>
+        <Card>
           <Card.Header title={name} extra={<span>{position}</span>} />
           <Card.Body>
             <div>{`年齡：${age}`}</div>
@@ -33,9 +32,8 @@ const ResumeCard = ({ list }) => {
           <Card.Footer content={`電話：${phone}`} />
         </Card>
         <WhiteSpace />
-      </Fragment>
+      </div>
     )
   );
-};
 
 export default ResumeCard;
