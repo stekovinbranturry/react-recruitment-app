@@ -68,79 +68,77 @@ const SeekerProfile = () => {
       <NavBar className='nav-bar' mode='dark'>
         牛人个人信息页
       </NavBar>
-      <div className='page-content'>
-        <WingBlank>
-          <AvatarSelector />
-          <div className='input-title'>个人简历</div>
-          <List>
-            <InputItem
-              value={position}
-              onChange={v => setInput({ ...input, position: v })}
-              editable={editable}
-            >
-              职位
-            </InputItem>
-            <InputItem
-              value={name}
-              onChange={v => setInput({ ...input, name: v })}
-              editable={editable}
-            >
-              姓名
-            </InputItem>
-            <InputItem
-              value={age}
-              onChange={v => setInput({ ...input, age: v })}
-              editable={editable}
-            >
-              年龄
-            </InputItem>
-            <InputItem
-              value={education}
-              onChange={v => setInput({ ...input, education: v })}
-              editable={editable}
-            >
-              学历
-            </InputItem>
-            <TextareaItem
-              title='技能'
-              rows={3}
-              autoHeight
-              value={skills}
-              onChange={v => setInput({ ...input, skills: v })}
-              editable={editable}
-            />
-            <TextareaItem
-              title='工作经验'
-              rows={3}
-              autoHeight
-              value={workExperience}
-              onChange={v => setInput({ ...input, workExperience: v })}
-              editable={editable}
-            />
-            <TextareaItem
-              title='项目经验'
-              rows={3}
-              autoHeight
-              value={projectExperience}
-              onChange={v => setInput({ ...input, projectExperience: v })}
-              editable={editable}
-            />
-          </List>
-          <WhiteSpace size='lg' />
-          {editable ? (
-            <Button type='primary' onClick={handleConfirmUpdate}>
-              确认更新
-            </Button>
-          ) : (
-            <Button type='primary' onClick={() => setEditable(true)}>
-              编辑简历
-            </Button>
-          )}
-          <WhiteSpace size='lg' />
-          <Logout />
-          <WhiteSpace size='lg' />
-        </WingBlank>
-      </div>
+      <WingBlank>
+        <AvatarSelector />
+        <div className='input-title'>个人简历</div>
+        <List>
+          <InputItem
+            value={position}
+            onChange={v => setInput({ ...input, position: v })}
+            editable={editable}
+          >
+            职位
+          </InputItem>
+          <InputItem
+            value={name}
+            onChange={v => setInput({ ...input, name: v })}
+            editable={editable}
+          >
+            姓名
+          </InputItem>
+          <InputItem
+            value={age}
+            onChange={v => setInput({ ...input, age: v })}
+            editable={editable}
+          >
+            年龄
+          </InputItem>
+          <InputItem
+            value={education}
+            onChange={v => setInput({ ...input, education: v })}
+            editable={editable}
+          >
+            学历
+          </InputItem>
+          <TextareaItem
+            title='技能'
+            rows={3}
+            autoHeight
+            value={skills}
+            onChange={v => setInput({ ...input, skills: v })}
+            editable={editable}
+          />
+          <TextareaItem
+            title='工作经验'
+            rows={3}
+            autoHeight
+            value={workExperience}
+            onChange={v => setInput({ ...input, workExperience: v })}
+            editable={editable}
+          />
+          <TextareaItem
+            title='项目经验'
+            rows={3}
+            autoHeight
+            value={projectExperience}
+            onChange={v => setInput({ ...input, projectExperience: v })}
+            editable={editable}
+          />
+        </List>
+        <WhiteSpace size='lg' />
+        {editable ? (
+          <Button type='primary' onClick={handleConfirmUpdate}>
+            确认更新
+          </Button>
+        ) : (
+          <Button type='primary' onClick={() => setEditable(true)}>
+            编辑简历
+          </Button>
+        )}
+        <WhiteSpace size='lg' />
+        <Logout />
+        <WhiteSpace size='lg' />
+      </WingBlank>
     </Fragment>
   );
 };
