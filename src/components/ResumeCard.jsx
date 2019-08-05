@@ -18,18 +18,18 @@ const ResumeCard = ({ list }) =>
         <Card>
           <Card.Header title={name} extra={<span>{position}</span>} />
           <Card.Body>
-            <div>{`年齡：${age}`}</div>
+            <div>{`年龄：${age}`}</div>
             <WhiteSpace size='sm' />
-            <div>{`學歷：${education}`}</div>
+            <div>{`学历：${education}`}</div>
             <WhiteSpace size='sm' />
             <div>{`技能：${skills}`}</div>
             <WhiteSpace size='sm' />
-            <div>{`工作經歷：${workExperience}`}</div>
+            <div>{`工作经历：${workExperience}`}</div>
             <WhiteSpace size='sm' />
-            <div>{`項目經歷：${projectExperience}`}</div>
+            <div>{`项目经历：${projectExperience}`}</div>
             <WhiteSpace size='sm' />
           </Card.Body>
-          <Card.Footer content={`電話：${phone}`} />
+          <Card.Footer content={`电话：${phone}`} />
         </Card>
         <WhiteSpace />
       </div>
