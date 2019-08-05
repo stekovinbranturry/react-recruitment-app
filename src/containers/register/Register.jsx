@@ -58,7 +58,11 @@ const Register = () => {
 				}
 				if (res.status === 200 && res.data.code === 1000) {
 					Toast.info(REGISTER_SUCCESS);
-					updateUser({ phone, identity, isLogin: true });
+					updateUser({
+						phone: phone.str.replace(/\s+/g, ''),
+						identity,
+						isLogin: true
+					});
 					setRedirectPath(getRirectPath(registerInfo));
 				}
 			})
@@ -87,8 +91,8 @@ const Register = () => {
 			<WingBlank>
 				<List>
 					<InputItem
-						type="phone"
-						placeholder="186 1234 1234"
+						type='phone'
+						placeholder='186 1234 1234'
 						error={phoneErr}
 						onErrorClick={onErrorClick}
 						value={phone}
@@ -97,23 +101,23 @@ const Register = () => {
 						手机号码
 					</InputItem>
 					<InputItem
-						type="password"
-						placeholder="****"
+						type='password'
+						placeholder='****'
 						value={password}
 						onChange={v => setPassword(v)}
 					>
 						密码
 					</InputItem>
 					<InputItem
-						type="password"
-						placeholder="****"
+						type='password'
+						placeholder='****'
 						value={confirmPassword}
 						onChange={v => setConfirmPassword(v)}
 					>
 						确认密码
 					</InputItem>
 				</List>
-				<div className="input-title">选择身份：</div>
+				<div className='input-title'>选择身份：</div>
 				<List>
 					<RadioItem
 						checked={identity === 'seeker'}
@@ -128,8 +132,8 @@ const Register = () => {
 						BOSS
 					</RadioItem>
 				</List>
-				<WhiteSpace size="xl" />
-				<Button type="primary" onClick={handleRegister}>
+				<WhiteSpace size='xl' />
+				<Button type='primary' onClick={handleRegister}>
 					注册
 				</Button>
 			</WingBlank>

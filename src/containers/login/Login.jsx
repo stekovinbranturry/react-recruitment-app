@@ -27,7 +27,7 @@ const Login = props => {
 	const [phoneErr, setPhoneErr] = useState(false);
 	const [redirectPath, setRedirectPath] = useState('');
 
-	const loginInfo = { phone, password };
+	const loginInfo = { phone: phone.replace(/\s+/g, ''), password };
 
 	const phoneOnChange = phone => {
 		if (phone.replace(/\s/g, '').length < 11) {
@@ -77,8 +77,8 @@ const Login = props => {
 			<WingBlank>
 				<List>
 					<InputItem
-						type="phone"
-						placeholder="186 1234 1234"
+						type='phone'
+						placeholder='186 1234 1234'
 						error={phoneErr}
 						onErrorClick={onErrorClick}
 						value={phone}
@@ -87,20 +87,20 @@ const Login = props => {
 						手机号码
 					</InputItem>
 					<InputItem
-						type="password"
-						placeholder="****"
+						type='password'
+						placeholder='****'
 						value={password}
 						onChange={v => setPassword(v)}
 					>
 						密码
 					</InputItem>
 				</List>
-				<WhiteSpace size="xl" />
-				<Button type="primary" onClick={handleLogin}>
+				<WhiteSpace size='xl' />
+				<Button type='primary' onClick={handleLogin}>
 					登录
 				</Button>
 				<WhiteSpace />
-				<Button type="primary" onClick={() => props.history.push('/register')}>
+				<Button type='primary' onClick={() => props.history.push('/register')}>
 					注册
 				</Button>
 			</WingBlank>
