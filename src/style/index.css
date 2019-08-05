@@ -260,4 +260,11 @@ th {
   width: 100%;
   bottom: 0;
 }
+
+.chat-input {
+  position: fixed;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
 /*# sourceMappingURL=index.css.map */
